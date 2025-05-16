@@ -225,7 +225,29 @@
     </div>
     <button class="reset-btn" id="resetBtn" style="display:none;">Reset</button>
     <div class="footer-note">
-      Assumes: 35 MPG, $0.11/mi maintenance, 40,000 annual miles for insurance calculation.
+      Assumes: 35 MPG, <a href="#" id="maintenanceInfoLink" class="info-link">$0.11/mi maintenance</a>, 40,000 annual miles for insurance calculation.
+    </div>
+
+    <!-- Maintenance Info Modal -->
+    <div id="maintenanceModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>What's Included in $0.11/mile Maintenance?</h3>
+        <p>Covers routine upkeep and normal wear:</p>
+        <ul>
+          <li>Oil changes</li>
+          <li>Tires</li>
+          <li>Brakes</li>
+          <li>Transmission fluid</li>
+          <li>Filters, spark plugs, wipers</li>
+          <li>Small repairs (battery, belts, bulbs, hoses)</li>
+          <li>Fluids (coolant, brake, etc.)</li>
+        </ul>
+        <p><strong>Does not include</strong> fuel, insurance, big repairs, or accidents.</p>
+        <h4>How is this number calculated?</h4>
+        <p>Based on AAA, Edmunds, and driver averages for compact sedans like the Honda Civic.</p>
+        <p>Industry range: $0.09–$0.12 per mile for high-mileage use.</p>
+      </div>
     </div>
   </div>
   <script>
@@ -320,6 +342,29 @@
     const formInputs = form.querySelectorAll('input[type="radio"], input[type="checkbox"]');
     formInputs.forEach(input => {
       input.addEventListener('change', calculate);
+    });
+    
+    // Modal functionality
+    const modal = document.getElementById('maintenanceModal');
+    const modalLink = document.getElementById('maintenanceInfoLink');
+    const closeBtn = document.querySelector('.close-btn');
+    
+    // Open modal when clicking the maintenance info link
+    modalLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      modal.style.display = 'block';
+    });
+    
+    // Close modal when clicking the close button
+    closeBtn.addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+    
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
     });
 
   </script>
